@@ -1,0 +1,53 @@
+/**
+ * Alptis theme for reveal.js.
+ *
+ */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// Include theme-specific fonts
+@import url(../../lib/font/source-sans-pro/source-sans-pro.css);
+
+
+// Override theme settings (see ../template/settings.scss)
+$backgroundColor: #fff;
+
+$mainColor: #485155;
+$headingColor: #008836;
+$heading1TextShadow: 0 1px 0 darken($headingColor, 4), 0 2px 0 darken($headingColor, 5), 0 3px 0 darken($headingColor, 6), 0 4px 0 darken($headingColor, 7), 0 5px 0 darken($headingColor, 8), 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 20px 20px rgba(0,0,0,.15);
+
+$mainFont: Arial, sans-serif;
+$headingFont: Arial, sans-serif;
+$headingTextShadow: none;
+$headingLetterSpacing: normal;
+$headingTextTransform: uppercase;
+$headingFontWeight: 600;
+$linkColor: #008836;
+$linkColorHover: lighten( $linkColor, 15% );
+$selectionBackgroundColor: lighten( $linkColor, 25% );
+
+.has-dark-background {
+	&, h1, h2, h3, h4, h5, h6 {
+		color: #fff;
+	}
+}
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+.reveal:before {
+	content: "";
+	display: block;
+	width: 105px;
+	height: 30px;
+	background: url(../../img/logo-alptis.png) no-repeat center center;
+	position: fixed;
+	top: 20px;
+	left: 20px;
+}

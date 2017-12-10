@@ -1,0 +1,61 @@
+code mark {
+    /*
+    font-weight: bold;
+    background-color: #0f0f0f;
+    */
+}
+
+
+.text-hover-image {
+}
+.reveal .text-hover-image {
+    background: black;
+    color: white;
+    opacity: 0.7; 
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.75) !important;
+}
+
+.align-top {
+	position: absolute;
+	top: 0 !important;
+}
+
+.align-left {
+	text-align: left !important;
+}
+
+.align-right {
+	text-align: right !important;
+}
+
+.bg-left .slide-background.present {
+	background-position: left center;
+}
+
+.bg-right .slide-background.present {
+	background-position: right center;
+}
+
+.bg-top .slide-background.present {
+	background-position: center top;
+}
+
+.bg-bottom .slide-background.present {
+	background-position: center bottom;
+}
+
+.bg-left-top.slide-background.present {
+	background-position: left top;
+}
+
+.bg-right-top .slide-background.present {
+	background-position: right top;
+}
+
+.bg-left-bottom .slide-background.present {
+	background-position: left bottom;
+}
+
+.bg-right-bottom .slide-background.present {
+	background-position: right bottom;
+}
