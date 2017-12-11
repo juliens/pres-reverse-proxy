@@ -7,10 +7,22 @@ comment on peut ecrire un reverse proxy avec go en 30mins. Tout d'abord je vais
 me présenter, car je suis un peu nouveau dans la communauté go
 
 ***
-JulienS
+https://github.com/juliens
+
+@juguul
 
 note: je m'appele Julien, je fais du dev depuis +10 (après on compte plus de
 toute facon) et je suis nouveau dans la communauté go car je faisais du PHP
+
+**
+
+<img src="./img/juliens.png" height="300" style="background-color:white" />
+<img src="./img/moi.jpg" height="300" style="background-color:white" />
+
+**
+<img src="./img/php.png" height="300" style="background-color:white" />
+<img src="./img/tomate.jpg" height="300" style="background-color:white" />
+
 **
 <img src="./img/evolution.svg" height="300" style="background-color:white" />
 
@@ -33,8 +45,15 @@ deployer des microservices facilement. En gros c'est un reverse proxy qui se
 reload à chaud, en se basant directement sur ce qui est déployé dans les
 orchestrators. Bon et si on commencait à créer le notre de reverse proxy
 
+**
+<img src="./img/architecture.png" height="300" style="background-color:white" />
+
+
 ***
-Wikipedia
+<img src="./img/go.gif" height="300" style="background-color:white" />
+
+**
+<img src="./img/wikipedia.jpg" height="300" style="background-color:white" />
 
 Note: Alors moi, quand je connais pas très bien un truc, je cherche ce que
 c'est sur Wikipedia, car tout le monde sait que Wikipedia est la vérité absolue
@@ -54,13 +73,15 @@ Note: cela nous donne a peu près ca
 ***
 servers !!
 
+<img src="./img/servers.gif" height="300" />
+
 **
 <img src="./img/docker.png" height="300" />
 
 ***
 client 
 ** 
-<img src="./img/mozilla-firefox-logo.jpg" height="300" />
+<img src="./img/curl-logo.svg" style="background-color:white" height="300" />
 
 ***
 proxy server
@@ -70,8 +91,12 @@ ListenAndServe (demo)
 
 ***
 returned to the client
+
+<img src="./img/boomerang.gif" style="background-color:white" height="300" />
+
 **
 httptest.ReverseProxy (demo)
+
 **
 30 min ?
 
@@ -132,18 +157,17 @@ X-Forwarded-Host
 X-Forwarded-Port
 
 ***
-Path problem ?
+Stream
 
 ***
 Trailer
 
-***
-Stream
 
 ***
 HTTP2
 
 ***
+Questions ?
 WebSocket ?
 
 
