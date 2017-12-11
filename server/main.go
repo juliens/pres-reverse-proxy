@@ -16,6 +16,13 @@ func main() {
 			rw.WriteHeader(500)
 			fmt.Println(err)
 		}
+
+		for key, values := range resp.Header {
+			for _, value := range values {
+				rw.Header().Add(key, value)
+			}
+		}
+		rw.WriteHeader(resp.StatusCode)
 		io.Copy(rw, resp.Body)
 	})
 	http.ListenAndServe(":8080", handler)
