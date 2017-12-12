@@ -1,135 +1,124 @@
-Ecrire un reverse-proxy
-avec go
-en 30 mins
-
-Note: Bonjour à tous, merci d'être venu à ce talk, ou je vais vous expliquer
-comment on peut ecrire un reverse proxy avec go en 30mins. Tout d'abord je vais
-me présenter, car je suis un peu nouveau dans la communauté go
-
+How to write a reverse-proxy in 25 minutes?
 ***
 https://github.com/juliens
 
 @juguul
 
-note: je m'appele Julien, je fais du dev depuis +10 (après on compte plus de
-toute facon) et je suis nouveau dans la communauté go car je faisais du PHP
+Note: Good morning, my name is Julien,
 
 **
-
-<img src="./img/juliens.png" height="300" style="background-color:white" />
-<img src="./img/moi.jpg" height="300" style="background-color:white" />
-
-**
-<img src="./img/php.png" height="300" style="background-color:white" />
-<img src="./img/tomate.jpg" height="300" style="background-color:white" />
-
-**
-<img src="./img/evolution.svg" height="300" style="background-color:white" />
-
-note: oui je sais, chacun ces problèmes dans la vie, mais donc, je me suis mis
-au go, et j'ai rejoins la société ...
-**
-<img src="./img/containous.svg" height="300" style="background-color:white" />
-Note: Containous, et chez Containous, nous travaillons plus particulièrement
-sur ...
+<img src="./img/containous.logo.png" height="300" style="background-color:white" />
+Note:  I'm a Go developer. I work at Containous.
 **
 <img src="./img/traefik.svg" height="300" style="background-color:white" />
-Note: Traefik ! Alors je pense que si vous faites du go à Lyon, vous avez surement
-deja entendu parler de Traefik, mais rapidement Traefik kezako 
+Note: Containous is a company behind an open source project named Traefik.
 **
+Traefik
 a modern HTTP reverse proxy and load balancer made to deploy microservices with
 ease
 
-Note: Traefik c'est un reverse proxy et load balancer modern, créé pour
-deployer des microservices facilement. En gros c'est un reverse proxy qui se
-reload à chaud, en se basant directement sur ce qui est déployé dans les
-orchestrators. Bon et si on commencait à créer le notre de reverse proxy
-
-**
-<img src="./img/architecture.png" height="300" style="background-color:white" />
-
+Note: And Traefik is an open source reverse proxy made to deploy microservices with ease.
+It means that Traefik doesn't need any configuration file. It will connect to
+your orchestrator API and then it will refresh dynamically its configuration by
+listening to your orchestrator events.
 
 ***
 <img src="./img/go.gif" height="300" style="background-color:white" />
+Note: So today, It makes sense for me to talk to you about how to write a reverse proxy.
 
 **
 <img src="./img/wikipedia.jpg" height="300" style="background-color:white" />
 
-Note: Alors moi, quand je connais pas très bien un truc, je cherche ce que
-c'est sur Wikipedia, car tout le monde sait que Wikipedia est la vérité absolue
+Note: When I start to work on a presentation, I usually search for the main words of my
+talk in Wikipedia, because everybody knows that Wikipedia is the real truth.
+
 **
-a reverse proxy is a type of proxy server that retrieves resources on behalf
+A reverse proxy is a type of proxy server that retrieves resources on behalf
 of a client from one or more servers. These resources are then returned to the
 client as if they originated from the Web server itself.
 
-Note: Si on cherche reverse proxy sur Wikipedia, on tombe sur cette
-définition, si on prends les mots importants
+Note: And if we search on Wikipedia for reverse-proxy, we can read something
+like this:
+
 **
-a reverse proxy is a type of **proxy server** that retrieves resources on behalf
+A reverse proxy is a type of **proxy server** that retrieves resources on behalf
 of a **client** from one or more **servers**. These resources are then **returned to the
 client** as if they originated from the Web server itself.
 
-Note: cela nous donne a peu près ca
+Note: If we highlight the most important words, we can say something like "This is a **proxy server** that **returned** resources from **servers** to a **client**"
+**
+- Server
+- Client
+- (Proxy) Server
+- Returned (resources)
+
+Note: So for this live coding session, we will need a server, a client and then we will live a code a proxy server to returned resources.
 ***
-servers !!
+
+
+## Server
+
 
 <img src="./img/servers.gif" height="300" />
+
+Note: Let's start with the server. I think that today, the simplest server we can have is a docker container.
 
 **
 <img src="./img/docker.png" height="300" />
 
+Note: So we run a simple container that I have already prepare for this demo, named demo.
+
 ***
-client 
-** 
+##Client
+Note: For the client, I could have taken a browser, but with a browser it could
+be difficult to verify some "raw" information. So I prefer to use the curl command.
+**
 <img src="./img/curl-logo.svg" style="background-color:white" height="300" />
-
+Note:
+So we just need to get the ip of our container, and then we try to call an url on it,
+with curl.
+And we have all we need!
 ***
-proxy server
+##Proxy server
 
-**
-ListenAndServe (demo)
-
+Note: 3.35 For the proxy server, this is where we start the live coding. We have
+a main. If we need a server, we can use the http package to launch a webserver with HTTP Listen and serve. Now let's try this server with the curl command.
 ***
-returned to the client
-
-<img src="./img/boomerang.gif" style="background-color:white" height="300" />
-
+## returned to the client
+Note: And now, we need to returned resources to the client
+We create the URL with our container IP. And then we use the http.ReverseProxy. And we try again our curl command. And this ok!
 **
-httptest.ReverseProxy (demo)
+## 30 min ?
 
-**
-30 min ?
-
+<!-- .slide: class="backgrounded" data-background="./img/past2.jpg" -->
+Note: Thank you very much and do you have questions, oh yes, I didn't use the 25 minutes.
+We will deep dive in this reverse proxy implementation. But I think this is important to
+know that if you need a reverse proxy in go, you can use this implementation. It is maintain by the go team. And it is improved in every release. For example, in the 1.12, they add the support of websocket.
 **
 <!-- .slide: data-background="./img/pieces-detachees-auto.jpg" -->
 
 ##Deep Dive
-***
-Send Request
-
-**
-RoundTrip (demo)
 
 ***
-Copy response
+<!-- .slide: data-background="./img/Background.svg" data-background-color="#DDD" -->
+
+Note: Now let's start to implement the guts of this reverse proxy. For this, I made a list of things to do. And the first one is "Forward request"
 
 **
-io.Copy (demo)
+## Forward request
 
+**
+<!-- .slide: data-background="./img/Forward.svg" data-background-color="#DDD" -->
 ***
-Response headers
-
+## Copy response
 **
-image exemple
-
-**
-copy headers (demo)
-
+<!-- .slide: data-background="./img/Copy_response.svg" data-background-color="#DDD" -->
 ***
-Hop-By-Hop
-
+## Copy Response headers
 **
-What is this ?
+<!-- .slide: data-background="./img/Copy_response_headers.svg" data-background-color="#DDD" -->
+***
+##Hop-By-Hop
 
 **
 RFC
@@ -143,33 +132,94 @@ RFC
       - Transfer-Encoding
       - Upgrade
 
-Other hop-by-hop headers MUST be listed in a Connection header, (section 14.10) to be introduced into HTTP/1.1 (or later). 
+Other hop-by-hop headers MUST be listed in a Connection header, (section 14.10) to be introduced into HTTP/1.1 (or later).
+
+***
+<!-- .slide: data-background="./img/Copy_response_headers.svg" data-background-color="#DDD" -->
+**
+##X-Forwarded-For
+**
+<!-- .slide: data-background="./img/XForwardedFor1.svg" data-background-color="#DDD" -->
 
 **
-Delete (demo)
+<!-- .slide: data-background="./img/XForwardedFor.svg" data-background-color="#DDD" -->
 
 ***
-X-Forwarded
+## Stream
+**
+<!-- .slide: data-background="./img/Stream.svg" data-background-color="#DDD" -->
+
+***
+## Trailer
 
 **
-X-Forwarded-For
-X-Forwarded-Host
-X-Forwarded-Port
+
+## Trailer
+```
+rw.Header().Set("Trailer", "X-Trailer,X-T2")  // announce trailers
+rw.WriteHeader(http.StatusOK) // Write header
+rw.Write(body) // Write Body
+rw.Header().Set("X-Trailer", "Value") // Fill the trailer value
+```
+
+**
+## raw chunked body
+```
+[Chunk size]
+Chunk Content
+[Chunk size] // If 0 this is trailer
+Chunk Content
+```
+**
+## raw chunked body
+```
+5
+HELLO
+0
+X-Trailer: Value
+```
+**
+## client part
+```
+fmt.Println(resp.Trailer) // map with only keys
+ioutil.ReadAll(resp.Body) // read all the chunk
+fmt.Println(resp.Trailer) // map with trailers values
+```
+***
+## SSL Termination
+
+**
+<!-- .slide: data-background="./img/SSL.svg" data-background-color="#DDD" -->
 
 ***
-Stream
+## HTTP2
+
+**
+HTTP2 needs HTTPS
+
+**
+~~HTTP2 needs HTTPS~~
+HTTP2 needs knowledge
+
+**
+## TLS ALPN
+**
+<!-- .slide: data-background="./img/TLSALPN.svg" data-background-color="#DDD" -->
+
+**
+## HTTP2 + Trailer = ?
+
+**
+## HTTP2 + Trailer = gRPC
+
 
 ***
-Trailer
-
-
-***
-HTTP2
+##Next
+ - WebSocket
+ - TrailerPrefix
+ - h2c
+ - TCP
+ - ...
 
 ***
 Questions ?
-WebSocket ?
-
-
-
-
