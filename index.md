@@ -117,25 +117,6 @@ Note: Now let's start to implement the guts of this reverse proxy. For this, I m
 ## Copy Response headers
 **
 <!-- .slide: data-background="./img/Copy_response_headers.svg" data-background-color="#DDD" -->
-***
-##Hop-By-Hop
-
-**
-RFC
- The following HTTP/1.1 headers are hop-by-hop headers:
-      - Connection
-      - Keep-Alive
-      - Proxy-Authenticate
-      - Proxy-Authorization
-      - TE
-      - Trailers
-      - Transfer-Encoding
-      - Upgrade
-
-Other hop-by-hop headers MUST be listed in a Connection header, (section 14.10) to be introduced into HTTP/1.1 (or later).
-
-***
-<!-- .slide: data-background="./img/Copy_response_headers.svg" data-background-color="#DDD" -->
 **
 ##X-Forwarded-For
 **
@@ -185,12 +166,6 @@ fmt.Println(resp.Trailer) // map with only keys
 ioutil.ReadAll(resp.Body) // read all the chunk
 fmt.Println(resp.Trailer) // map with trailers values
 ```
-***
-## SSL Termination
-
-**
-<!-- .slide: data-background="./img/SSL.svg" data-background-color="#DDD" -->
-
 ***
 ## HTTP2
 
